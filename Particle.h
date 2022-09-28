@@ -22,6 +22,8 @@ private:
 
 public:
 
+	Particle();
+	
 	int getX() { return m_x; }
 	int getY() { return m_y; }
 
@@ -40,6 +42,6 @@ public:
 
 	void setColor(int color) { m_color = color; }
 
-	int update_xy() { return m_x += m_dx; m_y += m_dy; }
+	int update_xy();
 
 };

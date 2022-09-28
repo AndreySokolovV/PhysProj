@@ -63,9 +63,14 @@ void UI::uiShow()
     glutCreateWindow("Проба");
 
     static std::function<void()> display_bounce;
+    static std::function<void()> timer_bounce;
 
     auto display = []() {
         display_bounce();
+    };
+
+    auto timerFunction = [](int value) {
+        timer_bounce();
     };
 
     display_bounce = [&]() {
@@ -81,7 +86,7 @@ void UI::uiShow()
         for(auto it = particles->begin();it != particles->end();++it)
         {
 
-            float x = (static_cast<float>(it->getX())-Consts::xMax/2)/(Consts::xMax/2);
+            float x = (static_cast<float>(it->getX()) - Consts::xMax / 2) / (Consts::xMax / 2);
             float y = (static_cast<float>(it->getY()) - Consts::yMax / 2) / (Consts::yMax / 2);
             glVertex2f(x,y);
 
@@ -91,6 +96,18 @@ void UI::uiShow()
 
         glutSwapBuffers();
 
+    };
+
+    timer_bounce = [&]() {
+
+        for (auto it = particles->begin(); it != particles->end(); ++it)
+        {
+            it->update_xy();
+
+        }
+
+        glutPostRedisplay();
+        glutTimerFunc(3, timerFunction, 1);
     };
 
     glutDisplayFunc(display);
