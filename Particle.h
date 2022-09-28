@@ -7,6 +7,9 @@ namespace Consts {
 	constexpr int yMax = 100;
 	constexpr int partNum = 100;
 	constexpr int partSize = 1;
+	constexpr int xMin = 0;
+	constexpr int yMin = 0;
+
 }
 
 class Particle

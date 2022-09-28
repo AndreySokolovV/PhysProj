@@ -24,8 +24,18 @@ for (int i = 0; i < Consts::partNum; i++) {
 	particle.setX(rand() % Consts::xMax);
 	particle.setY(rand() % Consts::yMax);
 
-	particle.setDx((rand() % 2) ? 1 : -1 );
-	particle.setDy((rand() % 2) ? 1 : -1 );
+	particle.setDx(rand() % 4-2);
+	particle.setDy(rand() % 4-2);
+
+	if (particle.getDx() == 0) 
+	{
+	    particle.setDx(particle.getDx() + 1);
+	}
+
+	if (particle.getDy() == 0)
+	{
+		particle.setDy(particle.getDy() + 1);
+	}
 
 	particles.push_back(particle);
 

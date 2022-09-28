@@ -104,10 +104,20 @@ void UI::uiShow()
         {
             it->update_xy();
 
+            if (it->getX() > Consts::xMax || it->getX() < Consts::xMin)
+            {
+                it->setDx(it->getDx() * -1);
+            }
+
+            if (it->getY() > Consts::yMax || it->getY() < Consts::yMin)
+            {
+                it->setDy(it->getDy() * -1);
+            }
         }
 
         glutPostRedisplay();
         glutTimerFunc(3, timerFunction, 1);
+
     };
 
     glutDisplayFunc(display);
