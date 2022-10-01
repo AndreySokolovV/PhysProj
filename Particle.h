@@ -9,6 +9,10 @@ namespace Consts {
 	constexpr int partSize = 1;
 	constexpr int xMin = 0;
 	constexpr int yMin = 0;
+	constexpr int x1 = 35;
+	constexpr int x2 = 65;
+	constexpr int y1 = 35;
+	constexpr int y2 = 65;
 
 }
 

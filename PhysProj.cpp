@@ -21,7 +21,7 @@ particles.reserve(Consts::partNum);
 Particle particle;
 for (int i = 0; i < Consts::partNum; i++) {
 
-	particle.setX(rand() % Consts::xMax);
+	particle.setX(rand() % Consts::x1);
 	particle.setY(rand() % Consts::yMax);
 
 	particle.setDx(rand() % 4-2);
