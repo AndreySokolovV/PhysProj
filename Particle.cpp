@@ -8,8 +8,8 @@ Particle::Particle()
 	 m_dy = 1;
 	 m_dx = 1;
 	 m_size = 0;
-	 m_color = 0;
-
+	 m_color = {255,0,0};
+	 m_Weight = 1;
 }
 
 int Particle::update_xy() 

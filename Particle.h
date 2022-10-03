@@ -1,7 +1,6 @@
 #pragma once
 
 
-
 namespace Consts {
 	constexpr int xMax = 100;
 	constexpr int yMax = 100;
@@ -16,6 +15,15 @@ namespace Consts {
 
 }
 
+struct Color
+{
+
+	int  r;
+	int  g;
+	int  b;
+
+};
+
 class Particle
 {
 private:
@@ -25,12 +33,15 @@ private:
 	int m_dy;
 	int m_dx;
 	int m_size;
-	int m_color;
-
+    Color m_color;
+	int m_Weight;
 public:
 
 	Particle();
 	
+	void SetWeight(int m) { m_Weight = m; }
+	int getWeight() { return m_Weight; }
+
 	int getX() { return m_x; }
 	int getY() { return m_y; }
 
@@ -47,7 +58,8 @@ public:
 
 	void setSize(int size) { m_size = size; }
 
-	void setColor(int color) { m_color = color; }
+	void setColor(Color color) { m_color = color;}
+	Color getColor() { return m_color; }
 
 	int update_xy();
 

@@ -2,6 +2,15 @@
 #include <functional>
 #include <vector>
 
+static int velocityCalc(int d1, int d2, int m1, int m2)
+{
+
+    int result;
+    result = ((m1 - m2) * d1 + 2 * m2 * d2) / (m1 + m2);
+    return result;
+
+}
+
 UI::UI(std::vector<Particle>& parts)
 {
     particles = &parts;
@@ -26,7 +35,7 @@ void UI::uiInit(int argc, char** argv)
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
     glutInitWindowPosition(0, 0);
-    glutInitWindowSize(1920, 1080);
+    glutInitWindowSize(1200, 800);
 
 }
 
@@ -55,12 +64,11 @@ bool UI::checkBoundX(int x, int y)
     //bool area3 = (y >= Consts::y1 && y < Consts::yMax) && ((x >= Consts::xMin && x < Consts::x1) || (x > Consts::x2 && x < Consts::xMax));
 
     bool bound1 = (x < Consts::xMin);
-    bool bound2 = (x > Consts::x1 && x < Consts::x2 && y < Consts::y1);
-    bool bound3 = (x < Consts::x2&& x > Consts::x1 && y < Consts::y1);
+    bool bound2 = (y > Consts::yMin && y < Consts::y1 && x > Consts::x1 && x < Consts::x2);
+    bool bound3 = (y > Consts::y2 && y < Consts::yMax && x > Consts::x1 && x < Consts::x2);
     bool bound4 = (x > Consts::xMax);
-    bool bound5 = (x > Consts::x1 && x < Consts::x1&& y > Consts::y2);
-    bool bound6 = (x < Consts::x2&& x > Consts::x1 && y > Consts::y2);
-    return (bound1 || bound2 || bound3 || bound4 || bound5 || bound6);
+
+    return (bound1 || bound2 || bound3  || bound4);
    
 }
 
@@ -70,41 +78,16 @@ bool UI::checkBoundY(int x, int y)
     //bool area2 = (x >= Consts::x1 && x <= Consts::x2 && y > Consts::y1 && y < Consts::y2);
     //bool area3 = (x >= Consts::x2 && x < Consts::xMax && y > Consts::yMin && y < Consts::yMax);
 
-    bool bound1 = (y < Consts::yMin);
-    bool bound2 = (y > Consts::yMax);
-    bool bound3 = (y == Consts::y1 && x > Consts::x1 && x < Consts::x2);
-    bool bound4 = (y == Consts::y2 && x > Consts::x1 && x < Consts::x2);
+    bool bound1 = (x > Consts::xMin && x < Consts::x1 && y > Consts::yMax);
+    bool bound2 = (x > Consts::xMin && x < Consts::x1 && y < Consts::yMin);
+    bool bound3 = (x > Consts::x1 && x < Consts::x2 && y > Consts::y2);
+    bool bound4 = (x > Consts::x1 && x < Consts::x2 && y < Consts::y1);
+    bool bound5 = (x > Consts::x2 && x < Consts::xMax && y > Consts::yMax);
+    bool bound6 = (x > Consts::x2 && x < Consts::xMax && y < Consts::yMin);
 
-    return (bound1 || bound2 || bound3 || bound4);
-
-}
-
- static void display1()
-{
-
-    glClearColor(1.0, 1.0, 1.0, 1.0);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glPointSize(10);
-
-
-    glBegin(GL_POINTS);
-
-    glColor3f(0, 0, 0);
-    //for (int i = 0; i < ; i++)
-    //for(auto elm : particles)
-    //{
-
-
-    //    glVertex2f(-0.99, 0.99);
-
-    //}
-   
-    glEnd();
-
-    glutSwapBuffers();
+    return (bound1 || bound2 || bound3 || bound4 || bound5 || bound6);
 
 }
-
 
  /*
  static std::function<void(int)> timer_bounce;
@@ -145,10 +128,11 @@ void UI::uiShow()
 
         glBegin(GL_POINTS);
 
-        glColor3f(0, 0, 0);
+        
         //for (int i = 0; i < ; i++)
         for(auto it = particles->begin();it != particles->end();++it)
         {
+            glColor3f(it->getColor().r/255, it->getColor().g/255, it->getColor().b/255);
 
             float x = (static_cast<float>(it->getX()) - Consts::xMax / 2) / (Consts::xMax / 2);
             float y = (static_cast<float>(it->getY()) - Consts::yMax / 2) / (Consts::yMax / 2);
@@ -166,25 +150,55 @@ void UI::uiShow()
 
         for (auto it = particles->begin(); it != particles->end(); ++it)
         {
-            it->update_xy();
+            //it->update_xy();
 
-            if (checkBoundX(it->getX(),it->getY()))
+            if (checkBoundX(it->getX() + it->getDx(), it->getY()))
             {
                 it->setDx(it->getDx() * -1);
                 
             }
 
-            if (checkBoundY(it->getX(), it->getY()))
+            else if (checkBoundY(it->getX(), it->getY() + it->getDy()))
             {
                 it->setDy(it->getDy() * -1);     
             }
 
+            it->update_xy();
             
 
         }
 
+        int dXnew1;
+        int dYnew1;
+
+        int dXnew2;
+        int dYnew2;
+
+        for (auto it1 = particles->begin(); it1 != std::prev(particles->end()); ++it1)
+        {
+
+            for (auto it2 = std::next(it1); it2 != std::prev(particles->end()); ++it2)
+            {
+                if (it1->getX() == it2->getX() && it1->getY() == it2->getY()) 
+                {
+                  
+                    dXnew1 = velocityCalc(it1->getDx(), it2->getDx(), it1->getWeight(), it2->getWeight());
+                    dYnew1 = velocityCalc(it1->getDy(), it2->getDy(), it1->getWeight(), it2->getWeight());
+                    dXnew2 = velocityCalc(it2->getDx(), it1->getDx(), it2->getWeight(), it1->getWeight());
+                    dYnew2 = velocityCalc(it2->getDy(), it1->getDy(), it2->getWeight(), it1->getWeight());
+
+                    it1->setDx(dXnew1);
+                    it1->setDy(dYnew1);
+
+                    it2->setDx(dXnew2);
+                    it2->setDy(dYnew2);
+
+                }
+            }
+        }
+
         glutPostRedisplay();
-        glutTimerFunc(3, timerFunction, 1);
+        glutTimerFunc(100, timerFunction, 1);
 
     };
 

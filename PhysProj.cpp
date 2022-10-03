@@ -4,7 +4,6 @@
 #include "UI.h"
 #include "Particle.h"
 
-
 //constexpr int xMax = 100;
 //constexpr int yMax = 100;
 //constexpr int partNum = 100;
@@ -26,6 +25,39 @@ for (int i = 0; i < Consts::partNum; i++) {
 
 	particle.setDx(rand() % 4-2);
 	particle.setDy(rand() % 4-2);
+    
+	Color color = {255,0,0};
+
+	switch (rand() % 4)
+	{
+
+	case 0:
+		color.r = 255;
+		color.g = 0;
+		color.b = 0;
+		break;
+
+	case 1:
+		color.r = 0;
+		color.g = 255;
+		color.b = 0;
+		break;
+
+	case 2:
+		color.r = 0;
+		color.g = 0;
+		color.b = 255;
+		break;
+
+	case 3:
+		color.r = 0;
+		color.g = 0;
+		color.b = 0;
+		break;
+
+	}
+
+	particle.setColor(color);
 
 	if (particle.getDx() == 0) 
 	{
