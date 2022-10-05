@@ -63,10 +63,10 @@ bool UI::checkBoundX(int x, int y)
     //bool area2 = (y < Consts::y2 && y > Consts::y1 && x >= Consts::xMin && x <= Consts::xMax);
     //bool area3 = (y >= Consts::y1 && y < Consts::yMax) && ((x >= Consts::xMin && x < Consts::x1) || (x > Consts::x2 && x < Consts::xMax));
 
-    bool bound1 = (x < Consts::xMin);
-    bool bound2 = (y > Consts::yMin && y < Consts::y1 && x > Consts::x1 && x < Consts::x2);
-    bool bound3 = (y > Consts::y2 && y < Consts::yMax && x > Consts::x1 && x < Consts::x2);
-    bool bound4 = (x > Consts::xMax);
+    bool bound1 = (x <= Consts::xMin);
+    bool bound2 = (y >= Consts::yMin && y <= Consts::y1 && x >= Consts::x1 && x <= Consts::x2);
+    bool bound3 = (y >= Consts::y2 && y <= Consts::yMax && x >= Consts::x1 && x <= Consts::x2);
+    bool bound4 = (x >= Consts::xMax);
 
     return (bound1 || bound2 || bound3  || bound4);
    
@@ -78,12 +78,12 @@ bool UI::checkBoundY(int x, int y)
     //bool area2 = (x >= Consts::x1 && x <= Consts::x2 && y > Consts::y1 && y < Consts::y2);
     //bool area3 = (x >= Consts::x2 && x < Consts::xMax && y > Consts::yMin && y < Consts::yMax);
 
-    bool bound1 = (x > Consts::xMin && x < Consts::x1 && y > Consts::yMax);
-    bool bound2 = (x > Consts::xMin && x < Consts::x1 && y < Consts::yMin);
-    bool bound3 = (x > Consts::x1 && x < Consts::x2 && y > Consts::y2);
-    bool bound4 = (x > Consts::x1 && x < Consts::x2 && y < Consts::y1);
-    bool bound5 = (x > Consts::x2 && x < Consts::xMax && y > Consts::yMax);
-    bool bound6 = (x > Consts::x2 && x < Consts::xMax && y < Consts::yMin);
+    bool bound1 = (x >= Consts::xMin && x <= Consts::x1 && y >= Consts::yMax);
+    bool bound2 = (x >= Consts::xMin && x <= Consts::x1 && y <= Consts::yMin);
+    bool bound3 = (x >= Consts::x1 && x <= Consts::x2 && y >= Consts::y2);
+    bool bound4 = (x >= Consts::x1 && x <= Consts::x2 && y <= Consts::y1);
+    bool bound5 = (x >= Consts::x2 && x <= Consts::xMax && y >= Consts::yMax);
+    bool bound6 = (x >= Consts::x2 && x <= Consts::xMax && y <= Consts::yMin);
 
     return (bound1 || bound2 || bound3 || bound4 || bound5 || bound6);
 
@@ -198,7 +198,7 @@ void UI::uiShow()
         }
 
         glutPostRedisplay();
-        glutTimerFunc(100, timerFunction, 1);
+        glutTimerFunc(3, timerFunction, 1);
 
     };
 

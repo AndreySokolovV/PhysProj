@@ -23,8 +23,8 @@ for (int i = 0; i < Consts::partNum; i++) {
 	particle.setX(rand() % Consts::x1);
 	particle.setY(rand() % Consts::yMax);
 
-	particle.setDx(rand() % 4-2);
-	particle.setDy(rand() % 4-2);
+	particle.setDx(rand() % Consts::maxDx - Consts::maxDx  /2);
+	particle.setDy(rand() % Consts::maxDy - Consts::maxDy / 2);
     
 	Color color = {255,0,0};
 
@@ -76,6 +76,6 @@ for (int i = 0; i < Consts::partNum; i++) {
 }
 ui.uiInit(argc, argv);
 ui.uiShow();
-std::cout << "end";
+//std::cout << "end";
 }
 
