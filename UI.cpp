@@ -2,10 +2,25 @@
 #include <functional>
 #include <vector>
 
-static int velocityCalc(int d1, int d2, int m1, int m2)
+static double myRound (double val)
 {
 
-    int result;
+    if (val > 0)
+    {
+        return val + 0.5;
+    }
+    else
+    {
+        return val - 0.5;
+    }
+
+}
+
+
+static double velocityCalc(double d1, double d2, double m1, double m2)
+{
+
+    double result;
     result = ((m1 - m2) * d1 + 2 * m2 * d2) / (m1 + m2);
     return result;
 
@@ -174,6 +189,8 @@ void UI::uiShow()
         int dXnew2;
         int dYnew2;
 
+        int test;
+
         for (auto it1 = particles->begin(); it1 != std::prev(particles->end()); ++it1)
         {
 
@@ -182,10 +199,15 @@ void UI::uiShow()
                 if (it1->getX() == it2->getX() && it1->getY() == it2->getY()) 
                 {
                   
-                    dXnew1 = velocityCalc(it1->getDx(), it2->getDx(), it1->getWeight(), it2->getWeight());
-                    dYnew1 = velocityCalc(it1->getDy(), it2->getDy(), it1->getWeight(), it2->getWeight());
-                    dXnew2 = velocityCalc(it2->getDx(), it1->getDx(), it2->getWeight(), it1->getWeight());
-                    dYnew2 = velocityCalc(it2->getDy(), it1->getDy(), it2->getWeight(), it1->getWeight());
+                    dXnew1 = round( velocityCalc(it1->getDx(), it2->getDx(), it1->getWeight(), it2->getWeight() ));
+                    dYnew1 = round( velocityCalc(it1->getDy(), it2->getDy(), it1->getWeight(), it2->getWeight() ));
+                    dXnew2 = round( velocityCalc(it2->getDx(), it1->getDx(), it2->getWeight(), it1->getWeight() ));
+                    dYnew2 = round( velocityCalc(it2->getDy(), it1->getDy(), it2->getWeight(), it1->getWeight() ));
+
+                    if (dXnew1 == 0 || dYnew1 == 0 || dXnew2 == 0 || dYnew2 == 0)
+                    {
+                        test = 1;
+                    }
 
                     it1->setDx(dXnew1);
                     it1->setDy(dYnew1);

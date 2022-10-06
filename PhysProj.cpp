@@ -25,7 +25,9 @@ for (int i = 0; i < Consts::partNum; i++) {
 
 	particle.setDx(rand() % Consts::maxDx - Consts::maxDx  /2);
 	particle.setDy(rand() % Consts::maxDy - Consts::maxDy / 2);
-    
+
+	particle.SetWeight(rand() % 10 + 1);
+
 	Color color = {255,0,0};
 
 	switch (rand() % 4)

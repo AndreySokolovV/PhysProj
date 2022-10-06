@@ -4,7 +4,7 @@
 namespace Consts {
 	constexpr int xMax = 100;
 	constexpr int yMax = 100;
-	constexpr int partNum = 200;
+	constexpr int partNum = 100;
 	constexpr int partSize = 1;
 	constexpr int xMin = 0;
 	constexpr int yMin = 0;
