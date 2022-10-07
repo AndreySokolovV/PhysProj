@@ -3,28 +3,40 @@
 #include <cstdlib>
 #include "UI.h"
 #include "Particle.h"
-
+#include <random>
 //constexpr int xMax = 100;
 //constexpr int yMax = 100;
 //constexpr int partNum = 100;
 //constexpr int partSize = 1;
+static double MyRandf(double lower_bound, double upper_bound)
+{
+
+	std::random_device rd;  // Will be used to obtain a seed for the random number engine
+	std::mt19937 gen(rd()); // Standard mersenne_twister_engine seeded with rd()
+	std::uniform_real_distribution<> dis(lower_bound, upper_bound);
+	return dis(gen);
+
+}
 
 int main(int argc, char** argv)
 {
-std::vector<Particle> particles;
+
+std::vector<Particle<double>> particles;
 
 UI ui(particles);
 
 particles.reserve(Consts::partNum);
 
-Particle particle;
+Particle<double> particle;
 for (int i = 0; i < Consts::partNum; i++) {
 
-	particle.setX(rand() % Consts::x1);
-	particle.setY(rand() % Consts::yMax);
+	particle.setX(MyRandf(Consts::xMin, Consts::x1));
+	particle.setY(MyRandf(Consts::yMin, Consts::yMax));
 
-	particle.setDx(rand() % Consts::maxDx - Consts::maxDx  /2);
-	particle.setDy(rand() % Consts::maxDy - Consts::maxDy / 2);
+	particle.setDx(MyRandf(-Consts::maxDx, Consts::maxDx));
+	particle.setDy(MyRandf(-Consts::maxDy, Consts::maxDy));
+
+	particle.setSize(Consts::partSize);
 
 	particle.SetWeight(rand() % 10 + 1);
 

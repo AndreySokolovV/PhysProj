@@ -1,21 +1,22 @@
 #pragma once
 
-
 namespace Consts {
-	constexpr int xMax = 100;
-	constexpr int yMax = 100;
+	constexpr double xMax = 100;
+	constexpr double yMax = 100;
 	constexpr int partNum = 100;
-	constexpr int partSize = 1;
-	constexpr int xMin = 0;
-	constexpr int yMin = 0;
-	constexpr int x1 = 35;
-	constexpr int x2 = 65;
-	constexpr int y1 = 35;
-	constexpr int y2 = 65;
-	constexpr int maxDx = 4;
-	constexpr int maxDy = 4;
+	constexpr double partSize = 2;
+	constexpr double xMin = 0.0;
+	constexpr double yMin = 0.0;
+	constexpr double x1 = 35;
+	constexpr double x2 = 65;
+	constexpr double y1 = 35;
+	constexpr double y2 = 65;
+	constexpr double maxDx = 1;
+	constexpr double maxDy = 1;
 
 }
+
+
 
 struct Color
 {
@@ -26,43 +27,44 @@ struct Color
 
 };
 
+template <typename T>
 class Particle
 {
 private:
 
-	int m_x;
-	int m_y;
-	int m_dy;
-	int m_dx;
-	int m_size;
+	T m_x;
+	T m_y;
+	T m_dy;
+	T m_dx;
+	T m_size;
     Color m_color;
-	int m_Weight;
+	T m_Weight;
 public:
 
 	Particle();
 	
-	void SetWeight(int m) { m_Weight = m; }
-	int getWeight() { return m_Weight; }
+	void SetWeight(T m) { m_Weight = m; }
+	T getWeight() { return m_Weight; }
 
-	int getX() { return m_x; }
-	int getY() { return m_y; }
+	T getX() { return m_x; }
+	T getY() { return m_y; }
 
-	void setX(int x) { m_x = x; }
-	void setY(int y) { m_y = y; }
+	void setX(T x) { m_x = x; }
+	void setY(T y) { m_y = y; }
 
-	int getDx() { return m_dx; }
-	int getDy() { return m_dy; }
+	T getDx() { return m_dx; }
+	T getDy() { return m_dy; }
 
-	void setDx(int dx) { m_dx = dx; }
-	void setDy(int dy) { m_dy = dy; }
+	void setDx(T dx) { m_dx = dx; }
+	void setDy(T dy) { m_dy = dy; }
 
-	int getSize() { return m_size; }
+	T getSize() { return m_size; }
 
-	void setSize(int size) { m_size = size; }
+	void setSize(T size) { m_size = size; }
 
 	void setColor(Color color) { m_color = color;}
 	Color getColor() { return m_color; }
 
-	int update_xy();
+	T update_xy();
 
 };

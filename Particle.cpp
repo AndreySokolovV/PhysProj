@@ -1,6 +1,6 @@
 #include "Particle.h"
 
-Particle::Particle()
+Particle<double>::Particle()
 {
 
 	 m_x = 0;
@@ -12,7 +12,7 @@ Particle::Particle()
 	 m_Weight = 1;
 }
 
-int Particle::update_xy() 
+double Particle<double>::update_xy()
 {
 
 	m_x += m_dx;

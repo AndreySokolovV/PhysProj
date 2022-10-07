@@ -6,25 +6,25 @@
 
 struct Point
 {
-	int x;
-	int y;
+	double x;
+	double y;
 };
 
 class UI
 {
 private:
 
-	std::vector<Particle>* particles = nullptr;
+	std::vector<Particle<double>>* particles = nullptr;
 	std::vector<Point> area;
 
-	bool checkBoundX(int x, int y);
-	bool checkBoundY(int y, int x);
+	bool checkBoundX(double x, double y);
+	bool checkBoundY(double y, double x);
 
 	void drawArea();
 	
 public:
 
-	UI(std::vector<Particle>& parts);
+	UI(std::vector<Particle<double>>& parts);
 	void uiInit(int argc, char** argv);
 	void uiShow();
 	
