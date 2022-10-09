@@ -11,8 +11,8 @@ namespace Consts {
 	constexpr double x2 = 65;
 	constexpr double y1 = 35;
 	constexpr double y2 = 65;
-	constexpr double maxDx = 1;
-	constexpr double maxDy = 1;
+	constexpr double maxDx = 0.5;
+	constexpr double maxDy = 0.5;
 
 }
 
@@ -27,11 +27,14 @@ struct Color
 
 };
 
+enum class State { outOfHit, inHit };
+
 template <typename T>
 class Particle
 {
 private:
-
+    
+	
 	T m_x;
 	T m_y;
 	T m_dy;
@@ -39,6 +42,8 @@ private:
 	T m_size;
     Color m_color;
 	T m_Weight;
+	State m_state;
+	int m_index;
 public:
 
 	Particle();
@@ -64,6 +69,12 @@ public:
 
 	void setColor(Color color) { m_color = color;}
 	Color getColor() { return m_color; }
+
+	State getState() { return m_state; }
+	void setState(State state) { m_state = state; }
+
+	int getIndex() { return m_index; }
+	void setIndex(int index) { m_index = index; }
 
 	T update_xy();
 

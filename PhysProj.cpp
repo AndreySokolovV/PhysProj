@@ -30,6 +30,9 @@ particles.reserve(Consts::partNum);
 Particle<double> particle;
 for (int i = 0; i < Consts::partNum; i++) {
 
+	particle.setIndex(i);
+	particle.getIndex();
+
 	particle.setX(MyRandf(Consts::xMin, Consts::x1));
 	particle.setY(MyRandf(Consts::yMin, Consts::yMax));
 

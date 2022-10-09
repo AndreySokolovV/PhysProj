@@ -10,6 +10,7 @@ Particle<double>::Particle()
 	 m_size = 0;
 	 m_color = {255,0,0};
 	 m_Weight = 1;
+	 m_state = State::outOfHit;
 }
 
 double Particle<double>::update_xy()

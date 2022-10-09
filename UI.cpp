@@ -181,28 +181,43 @@ void UI::uiShow()
 
         for (auto it1 = particles->begin(); it1 != std::prev(particles->end()); ++it1)
         {
+                
+            State inHit = State::outOfHit;
 
             for (auto it2 = std::next(it1); it2 != std::prev(particles->end()); ++it2)
             {
                 double maxSize = it1->getSize() > it2->getSize() ? it1->getSize() : it2->getSize();
-
-                //if (it1->getX() == it2->getX() && it1->getY() == it2->getY()) 
+                bool bothInHit = it1->getState() == State::inHit && it2->getState() == State::inHit;
+                bool bothNotInHit = it1->getState() == State::outOfHit && it2->getState() == State::outOfHit;
+                
                 if (inRange(it1->getX(), it2->getX(), it2->getSize() / 2) && inRange(it1->getY(), it2->getY(), it2->getSize() / 2))
                 {
 
-                    dXnew1 = velocityCalc(it1->getDx(), it2->getDx(), it1->getWeight(), it2->getWeight());
-                    dYnew1 = velocityCalc(it1->getDy(), it2->getDy(), it1->getWeight(), it2->getWeight());
-                    dXnew2 = velocityCalc(it2->getDx(), it1->getDx(), it2->getWeight(), it1->getWeight());
-                    dYnew2 = velocityCalc(it2->getDy(), it1->getDy(), it2->getWeight(), it1->getWeight());
+                    if (bothNotInHit)
+                    {                   
+                        dXnew1 = velocityCalc(it1->getDx(), it2->getDx(), it1->getWeight(), it2->getWeight());
+                        dYnew1 = velocityCalc(it1->getDy(), it2->getDy(), it1->getWeight(), it2->getWeight());
+                        dXnew2 = velocityCalc(it2->getDx(), it1->getDx(), it2->getWeight(), it1->getWeight());
+                        dYnew2 = velocityCalc(it2->getDy(), it1->getDy(), it2->getWeight(), it1->getWeight());
 
-                    it1->setDx(dXnew1);
-                    it1->setDy(dYnew1);
+                        it1->setDx(dXnew1);
+                        it1->setDy(dYnew1);
 
-                    it2->setDx(dXnew2);
-                    it2->setDy(dYnew2);
+                        it2->setDx(dXnew2);
+                        it2->setDy(dYnew2);
+
+                        it1->setState(State::inHit);
+                        it2->setState(State::inHit);
+
+                    }
+
+                    inHit = State::inHit;
 
                 }
             }
+
+            it1->setState(inHit);
+
         }
 
         for (auto it = particles->begin(); it != particles->end(); ++it)
