@@ -1,9 +1,11 @@
 #pragma once
 
-namespace Consts {
+namespace Consts
+{
+
 	constexpr double xMax = 100;
 	constexpr double yMax = 100;
-	constexpr int partNum = 100;
+	
 	constexpr double partSize = 2;
 	constexpr double xMin = 0.0;
 	constexpr double yMin = 0.0;
@@ -15,7 +17,6 @@ namespace Consts {
 	constexpr double maxDy = 0.5;
 
 }
-
 
 
 struct Color

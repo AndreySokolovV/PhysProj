@@ -124,7 +124,7 @@ bool UI::checkBoundY(double x, double y)
 void UI::uiShow()
 {
 
-    glutCreateWindow("Проба");
+    glutCreateWindow("Модель движения частиц газа");
 
     static std::function<void()> display_bounce;
     static std::function<void()> timer_bounce;
