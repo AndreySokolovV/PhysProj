@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 
 namespace Consts
 {
@@ -17,6 +18,9 @@ namespace Consts
 	constexpr double maxDy = 0.5;
 
 }
+
+
+
 
 
 struct Color
@@ -80,3 +84,11 @@ public:
 	T update_xy();
 
 };
+
+namespace MiscFunc
+{
+
+	double SearchMaxV(std::vector<Particle<double>>* part);
+
+
+}

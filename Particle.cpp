@@ -21,3 +21,38 @@ double Particle<double>::update_xy()
 	return 0;
 
 }
+
+namespace MiscFunc
+{
+
+	double SearchMaxV(std::vector<Particle<double>>* part)
+	{
+
+		auto particlePtr = part;
+
+		auto firstElm = (particlePtr->begin());
+
+		double max_V = (firstElm->getDx() * firstElm->getDx()) + (firstElm->getDy() * firstElm->getDy());
+
+		for (auto it = particlePtr->begin(); it != particlePtr->end(); ++it)
+		{
+
+			double dx = it->getDx();
+			double dy = it->getDy();
+
+			if (max_V < ((it->getDx() * it->getDx()) + (it->getDy() * it->getDy())))
+			{
+
+				max_V = (it->getDx() * it->getDx()) + (it->getDy() * it->getDy());
+
+			}
+
+
+
+		}
+
+		return sqrt(max_V);
+
+	}
+
+}

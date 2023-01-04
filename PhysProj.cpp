@@ -8,6 +8,9 @@
 #include <fstream>
 #include <string>
 #include "json11/json11.hpp"
+#include "TextOutput.h"
+#include <math.h>
+
 //constexpr int xMax = 100;
 //constexpr int yMax = 100;
 //constexpr int partNum = 100;
@@ -19,6 +22,8 @@ namespace Params
 	int partNum = 100;
 
 }
+
+
 
 static void LoadSettings()
 {
@@ -40,9 +45,9 @@ static void LoadSettings()
 	const auto json = json11::Json::parse(jsonData, err);
 
 	Params::partNum = atoi(json["numPoints"].dump().c_str());
-   
 	
-
+	
+	
 }
 
 
@@ -62,8 +67,9 @@ int main(int argc, char** argv)
 	LoadSettings();
 
 	std::vector<Particle<double>> particles;
+	TextOutput textOutput;
 
-	UI ui(particles);
+	UI ui(particles,textOutput);
 
 	particles.reserve(Params::partNum);
 
@@ -132,8 +138,16 @@ int main(int argc, char** argv)
 	
 
 	}
+
+	GlString glString("Max V: ", -0.3, 0.95);
+	textOutput.text.push_back(glString);
+	GlString glString2("10", -0.175, 0.95);
+	textOutput.text.push_back(glString2);
+	
 	ui.uiInit(argc, argv);
 	ui.uiShow();
-	//std::cout << "end";
+
+
+
 }
 

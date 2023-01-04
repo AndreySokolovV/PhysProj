@@ -127,14 +127,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GlString.cpp" />
     <ClCompile Include="json11\json11.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="PhysProj.cpp" />
+    <ClCompile Include="TextOutput.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GlString.h" />
     <ClInclude Include="json11\json11.hpp" />
     <ClInclude Include="Particle.h" />
+    <ClInclude Include="TextOutput.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
