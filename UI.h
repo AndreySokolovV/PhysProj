@@ -23,7 +23,7 @@ private:
 	bool checkBoundY(double y, double x);
 	
 	void drawArea();
-	void drawText();
+	void drawText	();
 
 public:
 

@@ -3,7 +3,8 @@
 
 namespace Consts
 {
-
+	constexpr double WinWidth = 1200;
+	constexpr double WinHeight = 800;
 	constexpr double xMax = 100;
 	constexpr double yMax = 100;
 	
@@ -89,6 +90,8 @@ namespace MiscFunc
 {
 
 	double SearchMaxV(std::vector<Particle<double>>* part);
-
+	double SearchMinV(std::vector<Particle<double>>* part);
+	void histogram(std::vector<Particle<double>>* part);
+	double SearchAvgV(std::vector<Particle<double>>* part);
 
 }

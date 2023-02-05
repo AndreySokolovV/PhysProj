@@ -65,6 +65,7 @@ int main(int argc, char** argv)
 {
 
 	LoadSettings();
+	 
 
 	std::vector<Particle<double>> particles;
 	TextOutput textOutput;
@@ -141,9 +142,21 @@ int main(int argc, char** argv)
 
 	GlString glString("Max V: ", -0.3, 0.95);
 	textOutput.text.push_back(glString);
-	GlString glString2("10", -0.175, 0.95);
+
+	GlString glString2(" ", -0.175, 0.95);
 	textOutput.text.push_back(glString2);
+
+	GlString glString3("Min V: ", -0.075, 0.95);
+	textOutput.text.push_back(glString3);
+
+	GlString glString4("", 0.0425, 0.95);
+	textOutput.text.push_back(glString4);
 	
+	GlString glString5("Avg V: ", 0.1, 0.95);
+	textOutput.text.push_back(glString5);
+
+	GlString glString6("", 0.22, 0.95);
+	textOutput.text.push_back(glString6);
 	ui.uiInit(argc, argv);
 	ui.uiShow();
 

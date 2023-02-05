@@ -34,7 +34,7 @@ static bool inRange(double C1, double C2,double range)
 UI::UI(std::vector<Particle<double>>& parts, TextOutput& text)
 {
     particles = &parts;
-
+        
     area.push_back({Consts::xMin,Consts:: yMin});
     area.push_back({ Consts::xMin,Consts::yMax });
     area.push_back({ Consts::x1,Consts::yMax });
@@ -60,12 +60,14 @@ void UI::uiInit(int argc, char** argv)
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
     glutInitWindowPosition(0, 0);
-    glutInitWindowSize(1200, 800);
+    glutInitWindowSize(Consts::WinWidth, Consts::WinHeight);
 
 }
 
 void UI::drawArea()
 {
+
+    glutReshapeWindow(Consts::WinWidth, Consts::WinHeight);
 
     for (int i = 0; i < area.size() - 1; i++) 
     {
@@ -109,14 +111,18 @@ void renderBitmapString(float x, float y, void* font, char* string)
 
 void UI::drawText()
 {
-    m_text->text[1].m_str = std::to_string(static_cast<int>(MiscFunc::SearchMaxV(particles) * 100));
- 
+   
+    m_text->text[1].m_str = std::to_string(static_cast<int>(MiscFunc::SearchMaxV(particles) * 1000));
+    m_text->text[3].m_str = std::to_string(static_cast<int>(MiscFunc::SearchMinV(particles) * 1000));
+    m_text->text[5].m_str = std::to_string(static_cast<int>(MiscFunc::SearchAvgV(particles) * 1000));
+    MiscFunc::histogram(particles);
     for (auto& elm : m_text->text)
     {
 
         renderBitmapString(elm.m_x, elm.m_y, GLUT_BITMAP_TIMES_ROMAN_24, const_cast<char*>(elm.m_str.c_str())); 
-        
+       
     }
+
 
     
 
@@ -198,7 +204,7 @@ void UI::uiShow()
 
         
         //for (int i = 0; i < ; i++)
-        for(auto it = particles->begin();it != particles->end();++it)
+        for (auto it = particles->begin();it != particles->end();++it)
         {
             glColor3f(it->getColor().r/255, it->getColor().g/255, it->getColor().b/255);
 
@@ -297,8 +303,9 @@ void UI::uiShow()
     };
 
     glutDisplayFunc(display);
-
+    
     glutTimerFunc(3, timerFunction, 1);
+   
 
     glutMainLoop();
 
