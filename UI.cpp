@@ -77,6 +77,7 @@ void UI::drawArea()
         float y2 = (static_cast<float>(area[i + 1].y) - Consts::yMax / 2) / (Consts::yMax / 2);
 
         glBegin(GL_LINES);
+        glColor3f(255, 0, 0);
         glVertex2f(x1,y1);
         glVertex2f(x2,y2);
         glEnd();
@@ -204,7 +205,7 @@ void UI::uiShow()
 
         
         //for (int i = 0; i < ; i++)
-        for (auto it = particles->begin();it != particles->end();++it)
+        for  (auto it = particles->begin();it != particles->end();++it)
         {
             glColor3f(it->getColor().r/255, it->getColor().g/255, it->getColor().b/255);
 
