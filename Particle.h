@@ -15,9 +15,6 @@ namespace Consts
 	constexpr double x2 = 65;
 	constexpr double y1 = 35;
 	constexpr double y2 = 65;
-	constexpr double maxDx = 0.5;
-	constexpr double maxDy = 0.5;
-
 }
 
 

@@ -19,7 +19,13 @@
 namespace Params
 {
 
-	int partNum = 100;
+	int partNum = 0;
+	double maxDx = 0;
+	double maxDy = 0;
+	double maxWeight = 0;
+	double minDx = 0;
+	double minDy = 0;
+	double minWeight = 0;
 
 }
 
@@ -45,8 +51,15 @@ static void LoadSettings()
 	const auto json = json11::Json::parse(jsonData, err);
 
 	Params::partNum = atoi(json["numPoints"].dump().c_str());
-	
-	
+
+	Params::maxDx = atof(json["maxV"].dump().c_str());
+	Params::maxDy = atof(json["maxV"].dump().c_str());
+
+	Params::minDx = atof(json["minV"].dump().c_str());
+	Params::minDy = atof(json["minV"].dump().c_str());
+
+	Params::maxWeight = atof(json["maxWeight"].dump().c_str());
+	Params::minWeight = atof(json["minWeight"].dump().c_str());
 	
 }
 
@@ -84,12 +97,12 @@ int main(int argc, char** argv)
 		particle.setX(MyRandf(Consts::xMin, Consts::x1));
 		particle.setY(MyRandf(Consts::yMin, Consts::yMax));
 
-		particle.setDx(MyRandf(-Consts::maxDx, Consts::maxDx));
-		particle.setDy(MyRandf(-Consts::maxDy, Consts::maxDy));
+		particle.setDx(MyRandf(Params::minDx, Params::maxDx));
+		particle.setDy(MyRandf(Params::minDy, Params::maxDy));
 
 		particle.setSize(Consts::partSize);
 
-		particle.SetWeight(rand() % 10 + 1);
+		particle.SetWeight(MyRandf(Params::minWeight, Params::maxWeight));
 
 		Color color = {255,0,0};
 

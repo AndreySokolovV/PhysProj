@@ -1,3 +1,8 @@
 {
-    "numPoints" : 100
+  "numPoints": 400,
+  "minV": 0.1,
+  "maxV": 0.5,
+  "minWeight": 1,
+  "maxWeight": 10
+
 }

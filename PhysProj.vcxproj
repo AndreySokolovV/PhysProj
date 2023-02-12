@@ -141,6 +141,9 @@
     <ClInclude Include="TextOutput.h" />
     <ClInclude Include="UI.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="settings.json" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

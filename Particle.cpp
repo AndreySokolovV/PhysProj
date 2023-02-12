@@ -135,12 +135,12 @@ namespace MiscFunc
 
 			}
 			
-			if (vAbs >= ((HistNum - 2) * HistSize + 1))
-			{
+			//if (vAbs >= ((HistNum - 2) * HistSize + 1))
+			//{
 
-				hist[HistNum - 1]++;
+				//hist[HistNum - 1]++;
 
-			}
+			//}
 
 		}
 
